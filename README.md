@@ -66,7 +66,7 @@ Start with the [M&A Integration Governance Playbook](docs/ma-integration-governa
 
 **Alessandro Binda** — Finance transformation and integration project manager with 18 years of experience across P&L ownership (up to EUR 33M), post-merger integration (2 M&A transactions), and multi-site financial consolidation (70+ locations).
 
-- 2 completed M&A integrations (Avis Budget Group, Birsa Group)
+- 2 completed M&A integrations (international groups, buy-side and sell-side)
 - Financial governance built from zero in 3 organisations
 - PE board reporting and investor relations management
 - ERP modernisation and finance process digitalisation
