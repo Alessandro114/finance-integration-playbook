@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Integration Playbook — Post-Merger, Multi-Site BI & Consolidation</title>
+<meta name="description" content="Open-source frameworks for Post-Merger Integration, PE board reporting, multi-site financial consolidation, franchise economics, and 360° finance BI dashboards. Built by Alessandro Binda.">
+<meta property="og:title" content="Finance Integration Playbook">
+<meta property="og:description" content="Battle-tested frameworks for PMI finance, PE reporting, multi-site consolidation, and BI dashboards.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alessandro114.github.io/finance-integration-playbook/">
+<link rel="canonical" href="https://alessandro114.github.io/finance-integration-playbook/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B1120;color:#e2e8f0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+.badge{display:inline-block;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);border-radius:999px;padding:.35rem 1.25rem;font-size:.8rem;color:#60a5fa;font-weight:600;margin-bottom:1.5rem}
+h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;line-height:1.1;margin-bottom:1.25rem;background:linear-gradient(135deg,#f1f5f9,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#f1f5f9;margin-bottom:.75rem}
+h3{font-size:.95rem;font-weight:700;color:#e2e8f0;margin-bottom:1rem}
+.sub{color:#94a3b8;font-size:1.15rem;max-width:48rem;margin:0 auto 2rem;line-height:1.6}
+.sub strong{color:#e2e8f0}
+.btn{display:inline-block;padding:.875rem 2rem;border-radius:.5rem;font-weight:700;font-size:1rem;text-decoration:none;transition:.2s}
+.btn-primary{background:#f1f5f9;color:#0f172a}
+.btn-outline{background:transparent;border:1px solid rgba(59,130,246,.5);color:#60a5fa}
+.btn-blue{background:#3b82f6;color:#fff;box-shadow:0 4px 30px rgba(59,130,246,.35);padding:1rem 2.5rem;font-size:1.05rem}
+.btn-ghost{background:transparent;border:1px solid rgba(241,245,249,.2);color:#f1f5f9;padding:1rem 2.5rem;font-size:1.05rem}
+.btn:hover{opacity:.85;text-decoration:none}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.75rem}
+.kpi{background:#111827;border-radius:.75rem;padding:1.25rem 1rem;text-align:center}
+.kpi-label{font-size:.7rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.kpi-val{font-size:1.5rem;font-weight:800;color:#f1f5f9}
+.kpi-delta{font-size:.8rem;font-weight:600;margin-top:.25rem}
+.kpi-vs{font-size:.65rem;color:#475569;margin-top:.15rem}
+.green{color:#22c55e}.amber{color:#f59e0b}.red{color:#ef4444}
+.b-green{border:1px solid rgba(34,197,94,.25)}.b-amber{border:1px solid rgba(245,158,11,.25)}.b-red{border:1px solid rgba(239,68,68,.25)}
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:2rem}
+.card{background:#111827;border-radius:.75rem;padding:1.5rem;border:1px solid rgba(59,130,246,.1)}
+.bar-row{margin-bottom:.5rem}
+.bar-label{display:flex;justify-content:space-between;font-size:.8rem;color:#cbd5e1;margin-bottom:2px}
+.bar-track{background:#1e293b;border-radius:4px;height:14px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 1s}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{text-align:left;padding:.5rem .75rem;color:#64748b;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid #1e293b}
+td{padding:.6rem .75rem}
+tr{border-bottom:1px solid #0f172a}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
+.fw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.fw-card{background:#111827;border:1px solid rgba(59,130,246,.15);border-radius:.75rem;padding:1.5rem;display:block;text-decoration:none;transition:border-color .2s}
+.fw-card:hover{border-color:rgba(59,130,246,.4);text-decoration:none}
+.fw-icon{font-size:2rem;margin-bottom:.75rem}
+.fw-title{font-size:1rem;font-weight:700;color:#f1f5f9;margin-bottom:.5rem}
+.fw-desc{font-size:.85rem;color:#94a3b8;line-height:1.5;margin-bottom:.75rem}
+.fw-meta{font-size:.7rem;font-weight:600;color:#60a5fa;text-transform:uppercase;letter-spacing:.1em}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.tech-card{background:#111827;border-radius:.5rem;padding:1rem 1.25rem;border:1px solid rgba(59,130,246,.08)}
+.tech-area{font-size:.7rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}
+.tech-items{font-size:.85rem;color:#cbd5e1;line-height:1.4}
+.profile-box{background:linear-gradient(135deg,#111827,#0f2a4a);border-radius:1rem;padding:2.5rem;border:1px solid rgba(59,130,246,.15);display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+.profile-main{flex:1 1 400px}
+.profile-name{font-size:1.75rem;font-weight:800;color:#f1f5f9;margin-bottom:.75rem}
+.profile-role{font-size:1rem;color:#60a5fa;font-weight:600;margin-bottom:1rem}
+.profile-bio{font-size:.95rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.profile-links{display:flex;gap:.75rem;flex-wrap:wrap}
+.profile-links a{padding:.625rem 1.5rem;border-radius:.4rem;font-weight:700;font-size:.85rem;color:#fff;text-decoration:none}
+.stats-box{flex:0 0 280px;background:#0B1120;border-radius:.75rem;padding:1.5rem;border:1px solid rgba(59,130,246,.15)}
+.stats-title{font-size:.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+.stat-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid #1e293b}
+.stat-label{font-size:.8rem;color:#94a3b8}
+.stat-value{font-size:.8rem;color:#f1f5f9;font-weight:700}
+.cta-section{text-align:center;padding:5rem 1.5rem;background:linear-gradient(135deg,#0B1120 0%,#0f2a4a 50%,#0B1120 100%)}
+.cta-title{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;color:#f1f5f9;margin-bottom:1rem}
+.cta-sub{color:#94a3b8;max-width:40rem;margin:0 auto 2rem;font-size:1.05rem;line-height:1.6}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-footer{color:#475569;font-size:.8rem;margin-top:1.5rem}
+.section{padding:2rem 0}
+.section-lg{padding:3rem 0}
+svg text{font-family:system-ui,-apple-system,sans-serif}
+@media(max-width:640px){.stats-box{flex:1 1 100%}.profile-box{padding:1.5rem}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section style="padding:5rem 0 3rem;text-align:center">
+<div class="wrap">
+  <div class="badge">Open Source — MIT Licensed</div>
+  <h1>Finance Integration Playbook</h1>
+  <p class="sub">
+    Battle-tested frameworks for <strong>Post-Merger Integration</strong>, <strong>PE board reporting</strong>,
+    <strong>multi-site consolidation</strong>, and <strong>360° finance BI dashboards</strong>.
+    2,700+ lines of practitioner knowledge from real M&amp;A transactions, 70+ location networks, and PE-backed governance.
+  </p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="https://github.com/Alessandro114/finance-integration-playbook" class="btn btn-primary" target="_blank">View on GitHub</a>
+    <a href="https://bookings.cloud.microsoft/bookwithme/user/2353647760594baebc7baa9ae06a5ad5%40get-scala.com?anonymous&ismsaljsauthenabled" class="btn btn-outline" target="_blank">Book a Call</a>
+  </div>
+</div>
+</section>
+
+<!-- KPI TILES -->
+<section class="section">
+<div class="wrap">
+  <h2 style="text-align:center;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#64748b;margin-bottom:1.5rem">Live CFO Cockpit — Sample Data</h2>
+  <div class="kpi-grid">
+    <div class="kpi b-green"><div class="kpi-label">Revenue</div><div class="kpi-val">EUR 1.8M</div><div class="kpi-delta green">&#9650; +5.2%</div><div class="kpi-vs">vs Budget</div></div>
+    <div class="kpi b-amber"><div class="kpi-label">EBITDA</div><div class="kpi-val">EUR 216K</div><div class="kpi-delta amber">&#9660; -3.1%</div><div class="kpi-vs">vs Budget</div></div>
+    <div class="kpi b-green"><div class="kpi-label">Cash Position</div><div class="kpi-val">EUR 890K</div><div class="kpi-delta green">&#9650; +120K</div><div class="kpi-vs">vs Prior Month</div></div>
+    <div class="kpi b-amber"><div class="kpi-label">DSO</div><div class="kpi-val">42 days</div><div class="kpi-delta amber">&#9650; +4 days</div><div class="kpi-vs">Target: 38d</div></div>
+    <div class="kpi b-green"><div class="kpi-label">Net Debt / EBITDA</div><div class="kpi-val">2.8x</div><div class="kpi-delta green">Covenant &lt;3.5x</div><div class="kpi-vs">Headroom: 0.7x</div></div>
+    <div class="kpi b-green"><div class="kpi-label">Headcount</div><div class="kpi-val">127 FTE</div><div class="kpi-delta green">+2 vs plan</div><div class="kpi-vs">Rev/FTE: EUR 14.2K</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CHARTS -->
+<section class="section">
+<div class="wrap">
+<div class="chart-grid">
+
+  <!-- Revenue Actual vs Budget -->
+  <div class="card">
+    <h3>Revenue — Actual vs Budget (EUR K)</h3>
+    <svg viewBox="0 0 650 150" style="width:100%;height:auto">
+      <!-- Budget bars (grey) -->
+      <rect x="6" y="55" width="19" height="77" rx="2" fill="#475569" opacity=".5"/><rect x="60" y="51" width="19" height="81" rx="2" fill="#475569" opacity=".5"/><rect x="114" y="47" width="19" height="85" rx="2" fill="#475569" opacity=".5"/><rect x="168" y="43" width="19" height="89" rx="2" fill="#475569" opacity=".5"/><rect x="222" y="38" width="19" height="94" rx="2" fill="#475569" opacity=".5"/><rect x="276" y="34" width="19" height="98" rx="2" fill="#475569" opacity=".5"/><rect x="330" y="30" width="19" height="102" rx="2" fill="#475569" opacity=".5"/><rect x="384" y="26" width="19" height="106" rx="2" fill="#475569" opacity=".5"/><rect x="438" y="22" width="19" height="110" rx="2" fill="#475569" opacity=".5"/><rect x="492" y="18" width="19" height="114" rx="2" fill="#475569" opacity=".5"/><rect x="546" y="14" width="19" height="118" rx="2" fill="#475569" opacity=".5"/><rect x="600" y="10" width="19" height="122" rx="2" fill="#475569" opacity=".5"/>
+      <!-- Actual bars (blue) -->
+      <rect x="27" y="52" width="19" height="80" rx="2" fill="#3b82f6" opacity=".85"/><rect x="81" y="44" width="19" height="88" rx="2" fill="#3b82f6" opacity=".85"/><rect x="135" y="38" width="19" height="94" rx="2" fill="#3b82f6" opacity=".85"/><rect x="189" y="34" width="19" height="98" rx="2" fill="#3b82f6" opacity=".85"/><rect x="243" y="27" width="19" height="105" rx="2" fill="#3b82f6" opacity=".85"/><rect x="297" y="23" width="19" height="109" rx="2" fill="#3b82f6" opacity=".85"/><rect x="351" y="29" width="19" height="103" rx="2" fill="#3b82f6" opacity=".85"/><rect x="405" y="22" width="19" height="110" rx="2" fill="#3b82f6" opacity=".85"/><rect x="459" y="17" width="19" height="115" rx="2" fill="#3b82f6" opacity=".85"/><rect x="513" y="12" width="19" height="120" rx="2" fill="#3b82f6" opacity=".85"/><rect x="567" y="6" width="19" height="126" rx="2" fill="#3b82f6" opacity=".85"/><rect x="621" y="0" width="19" height="132" rx="2" fill="#3b82f6" opacity=".85"/>
+      <!-- Labels -->
+      <text x="27" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Jan</text><text x="81" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Feb</text><text x="135" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Mar</text><text x="189" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Apr</text><text x="243" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">May</text><text x="297" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Jun</text><text x="351" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Jul</text><text x="405" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Aug</text><text x="459" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Sep</text><text x="513" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Oct</text><text x="567" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Nov</text><text x="621" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">Dec</text>
+      <!-- Legend -->
+      <rect x="500" y="0" width="10" height="10" rx="2" fill="#475569" opacity=".5"/><text x="514" y="9" fill="#94a3b8" font-size="9">Budget</text>
+      <rect x="560" y="0" width="10" height="10" rx="2" fill="#3b82f6" opacity=".85"/><text x="574" y="9" fill="#94a3b8" font-size="9">Actual</text>
+    </svg>
+  </div>
+
+  <!-- EBITDA Trend -->
+  <div class="card">
+    <h3>EBITDA Trend (EUR K)</h3>
+    <svg viewBox="0 0 600 120" style="width:100%;height:auto">
+      <rect x="4" y="52" width="44" height="53" rx="3" fill="#22c55e" opacity=".85"/><rect x="54" y="46" width="44" height="59" rx="3" fill="#22c55e" opacity=".85"/><rect x="104" y="42" width="44" height="63" rx="3" fill="#22c55e" opacity=".85"/><rect x="154" y="49" width="44" height="56" rx="3" fill="#22c55e" opacity=".85"/><rect x="204" y="35" width="44" height="70" rx="3" fill="#22c55e" opacity=".85"/><rect x="254" y="33" width="44" height="72" rx="3" fill="#22c55e" opacity=".85"/><rect x="304" y="40" width="44" height="65" rx="3" fill="#22c55e" opacity=".85"/><rect x="354" y="33" width="44" height="72" rx="3" fill="#22c55e" opacity=".85"/><rect x="404" y="28" width="44" height="77" rx="3" fill="#22c55e" opacity=".85"/><rect x="454" y="23" width="44" height="82" rx="3" fill="#22c55e" opacity=".85"/><rect x="504" y="19" width="44" height="86" rx="3" fill="#22c55e" opacity=".85"/><rect x="554" y="11" width="44" height="94" rx="3" fill="#22c55e" opacity=".85"/>
+      <text x="26" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Jan</text><text x="76" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Feb</text><text x="126" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Mar</text><text x="176" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Apr</text><text x="226" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">May</text><text x="276" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Jun</text><text x="326" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Jul</text><text x="376" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Aug</text><text x="426" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Sep</text><text x="476" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Oct</text><text x="526" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Nov</text><text x="576" y="116" text-anchor="middle" fill="#94a3b8" font-size="9">Dec</text>
+    </svg>
+    <div style="display:flex;justify-content:space-between;margin-top:.5rem;font-size:.7rem;color:#64748b">
+      <span>12.0%</span><span>12.3%</span><span>12.3%</span><span>11.0%</span><span>12.4%</span><span>12.3%</span><span>11.6%</span><span>12.0%</span><span>12.4%</span><span>12.8%</span><span>13.0%</span><span>13.3%</span>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>
+
+<!-- CASH + AR -->
+<section class="section">
+<div class="wrap">
+<div class="chart-grid">
+
+  <div class="card">
+    <h3>Cash Waterfall — Monthly (EUR K)</h3>
+    <div class="bar-row"><div class="bar-label"><span>Opening Cash</span><span style="color:#3b82f6;font-weight:600">770K</span></div><div class="bar-track"><div class="bar-fill" style="width:85.5%;background:#3b82f6"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Customer Receipts</span><span style="color:#22c55e;font-weight:600">+420K</span></div><div class="bar-track"><div class="bar-fill" style="width:46.7%;background:#22c55e"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Payroll</span><span style="color:#ef4444;font-weight:600">-180K</span></div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#ef4444"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Suppliers</span><span style="color:#ef4444;font-weight:600">-140K</span></div><div class="bar-track"><div class="bar-fill" style="width:15.5%;background:#ef4444"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Rent &amp; Facilities</span><span style="color:#ef4444;font-weight:600">-45K</span></div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#ef4444"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Tax</span><span style="color:#ef4444;font-weight:600">-30K</span></div><div class="bar-track"><div class="bar-fill" style="width:3.3%;background:#ef4444"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Capex</span><span style="color:#f59e0b;font-weight:600">-15K</span></div><div class="bar-track"><div class="bar-fill" style="width:1.7%;background:#f59e0b"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>Loan Repayment</span><span style="color:#ef4444;font-weight:600">-25K</span></div><div class="bar-track"><div class="bar-fill" style="width:2.8%;background:#ef4444"></div></div></div>
+    <div style="margin-top:.75rem;padding-top:.75rem;border-top:2px solid #1e293b"><div class="bar-label"><span style="font-weight:700;color:#f1f5f9">Closing Cash</span><span style="color:#3b82f6;font-weight:700;font-size:1rem">EUR 890K</span></div><div class="bar-track"><div class="bar-fill" style="width:98.9%;background:#3b82f6"></div></div></div>
+  </div>
+
+  <div class="card">
+    <h3>Accounts Receivable Aging</h3>
+    <div class="bar-row"><div class="bar-label"><span>Current (72%)</span><span style="color:#22c55e;font-weight:600">EUR 620K</span></div><div class="bar-track"><div class="bar-fill" style="width:95.4%;background:#22c55e"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>1-30 days (14%)</span><span style="color:#84cc16;font-weight:600">EUR 120K</span></div><div class="bar-track"><div class="bar-fill" style="width:18.5%;background:#84cc16"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>31-60 days (6%)</span><span style="color:#f59e0b;font-weight:600">EUR 55K</span></div><div class="bar-track"><div class="bar-fill" style="width:8.5%;background:#f59e0b"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>61-90 days (4%)</span><span style="color:#f97316;font-weight:600">EUR 35K</span></div><div class="bar-track"><div class="bar-fill" style="width:5.4%;background:#f97316"></div></div></div>
+    <div class="bar-row"><div class="bar-label"><span>90+ days (3%)</span><span style="color:#ef4444;font-weight:600">EUR 30K</span></div><div class="bar-track"><div class="bar-fill" style="width:4.6%;background:#ef4444"></div></div></div>
+    <div style="margin-top:1rem;font-size:.8rem;color:#64748b;border-top:1px solid #1e293b;padding-top:.75rem">
+      Total AR: <strong style="color:#e2e8f0">EUR 860K</strong> &nbsp;|&nbsp; Provision: <strong style="color:#f59e0b">EUR 18K (2.1%)</strong> &nbsp;|&nbsp; DSO: <strong style="color:#f59e0b">42 days</strong>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>
+
+<!-- MULTI-SITE SCORECARD TABLE -->
+<section class="section">
+<div class="wrap">
+  <div class="card" style="overflow-x:auto">
+    <h3>Multi-Site Scorecard — Location Performance</h3>
+    <table>
+      <thead><tr><th>#</th><th>Location</th><th>Region</th><th>Revenue (K)</th><th>CM2 %</th><th>LFL %</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#64748b">1</td><td style="color:#f1f5f9;font-weight:600">MIL-001</td><td style="color:#94a3b8">North</td><td>EUR 250K</td><td class="green" style="font-weight:600">22.0%</td><td class="green">+8%</td><td><span class="dot" style="background:#22c55e"></span></td></tr>
+        <tr><td style="color:#64748b">2</td><td style="color:#f1f5f9;font-weight:600">ROM-001</td><td style="color:#94a3b8">Central</td><td>EUR 180K</td><td class="green" style="font-weight:600">19.5%</td><td class="green">+6%</td><td><span class="dot" style="background:#22c55e"></span></td></tr>
+        <tr><td style="color:#64748b">3</td><td style="color:#f1f5f9;font-weight:600">MIL-002</td><td style="color:#94a3b8">North</td><td>EUR 220K</td><td class="green" style="font-weight:600">18.0%</td><td class="green">+4%</td><td><span class="dot" style="background:#22c55e"></span></td></tr>
+        <tr><td style="color:#64748b">4</td><td style="color:#f1f5f9;font-weight:600">FLR-001</td><td style="color:#94a3b8">Central</td><td>EUR 140K</td><td class="green" style="font-weight:600">16.5%</td><td class="green">+3%</td><td><span class="dot" style="background:#22c55e"></span></td></tr>
+        <tr><td style="color:#64748b">5</td><td style="color:#f1f5f9;font-weight:600">TRN-001</td><td style="color:#94a3b8">North</td><td>EUR 130K</td><td class="green" style="font-weight:600">15.0%</td><td class="green">+2%</td><td><span class="dot" style="background:#22c55e"></span></td></tr>
+        <tr><td style="color:#64748b">6</td><td style="color:#f1f5f9;font-weight:600">NAP-001</td><td style="color:#94a3b8">South</td><td>EUR 95K</td><td class="amber" style="font-weight:600">10.0%</td><td class="red">-1%</td><td><span class="dot" style="background:#f59e0b"></span></td></tr>
+        <tr><td style="color:#64748b">7</td><td style="color:#f1f5f9;font-weight:600">BAR-001</td><td style="color:#94a3b8">South</td><td>EUR 65K</td><td class="amber" style="font-weight:600">2.0%</td><td class="red">-3%</td><td><span class="dot" style="background:#f59e0b"></span></td></tr>
+        <tr><td style="color:#64748b">8</td><td style="color:#f1f5f9;font-weight:600">CAT-001</td><td style="color:#94a3b8">South</td><td>EUR 42K</td><td class="red" style="font-weight:600">-4.0%</td><td class="red">-15%</td><td><span class="dot" style="background:#ef4444"></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- FRAMEWORK CARDS -->
+<section class="section-lg">
+<div class="wrap">
+  <h2 style="text-align:center">Four Frameworks, 2,700+ Lines</h2>
+  <p style="text-align:center;color:#64748b;margin-bottom:2.5rem;font-size:1rem">Each document is a complete, production-ready reference — not a slide deck.</p>
+  <div class="fw-grid">
+    <a href="https://github.com/Alessandro114/finance-integration-playbook/blob/main/docs/ma-integration-governance-playbook.md" class="fw-card" target="_blank"><div class="fw-icon">&#128203;</div><div class="fw-title">M&amp;A Integration Governance</div><p class="fw-desc">Day-1 to Day-100+ playbook: IMO setup, RACI, CoA harmonisation, close calendar, ERP migration decision framework, intercompany policy, authority matrix, risk register.</p><div class="fw-meta">580+ lines — View on GitHub →</div></a>
+    <a href="https://github.com/Alessandro114/finance-integration-playbook/blob/main/docs/pe-board-reporting-framework.md" class="fw-card" target="_blank"><div class="fw-icon">&#128202;</div><div class="fw-title">PE Board Reporting Framework</div><p class="fw-desc">Monthly Financial Pack structure, EBITDA bridge waterfall, quarterly board deck, KPI governance with RAG logic, 13-week cash forecast, covenant monitoring.</p><div class="fw-meta">520+ lines — View on GitHub →</div></a>
+    <a href="https://github.com/Alessandro114/finance-integration-playbook/blob/main/docs/multi-site-financial-consolidation.md" class="fw-card" target="_blank"><div class="fw-icon">&#127970;</div><div class="fw-title">Multi-Site Consolidation</div><p class="fw-desc">7 ownership models, location P&amp;L with CM1/CM2/CM3, LFL analysis, franchise unit economics, fleet lifecycle, residual value sensitivity, cash pooling.</p><div class="fw-meta">780+ lines — View on GitHub →</div></a>
+    <a href="https://github.com/Alessandro114/finance-integration-playbook/blob/main/docs/finance-bi-dashboard-specification.md" class="fw-card" target="_blank"><div class="fw-icon">&#128421;</div><div class="fw-title">Finance BI Dashboard Spec</div><p class="fw-desc">8 interactive dashboards: CFO Cockpit, P&amp;L Deep Dive, Cash &amp; Treasury, Working Capital, Multi-Site Scorecard, Franchise Health, Fleet Lifecycle, Budget Tracker.</p><div class="fw-meta">840+ lines — View on GitHub →</div></a>
+  </div>
+</div>
+</section>
+
+<!-- TECH + FINANCE DNA -->
+<section class="section-lg">
+<div class="wrap">
+  <h2 style="text-align:center">Finance Meets Engineering</h2>
+  <p style="text-align:center;color:#94a3b8;max-width:42rem;margin:0 auto 2.5rem;font-size:1rem;line-height:1.6">
+    These frameworks exist because the author is both a <strong style="color:#e2e8f0">P&amp;L owner with 18 years of operational finance</strong> and a <strong style="color:#e2e8f0">hands-on technologist</strong> who builds the systems that automate what most consultants do manually. Finance without technology is slow. Technology without finance domain expertise is dangerous.
+  </p>
+  <div class="tech-grid">
+    <div class="tech-card"><div class="tech-area">ERP &amp; Systems</div><div class="tech-items">SAP, Salesforce, D365, Zucchetti, TeamSystem, Stripe, banking APIs</div></div>
+    <div class="tech-card"><div class="tech-area">Data &amp; BI</div><div class="tech-items">PostgreSQL, DuckDB, ETL pipelines, star schema, dimensional modelling, real-time dashboards</div></div>
+    <div class="tech-card"><div class="tech-area">Integration</div><div class="tech-items">60+ API connectors, middleware architecture, webhook orchestration, data mapping engines</div></div>
+    <div class="tech-card"><div class="tech-area">Automation</div><div class="tech-items">Automated close workflows, IC reconciliation, anomaly detection, alert engines, PDF report generation</div></div>
+    <div class="tech-card"><div class="tech-area">Infrastructure</div><div class="tech-items">Docker, systemd, nginx, Cloudflare, CI/CD, monitoring, self-healing agents</div></div>
+    <div class="tech-card"><div class="tech-area">AI / ML</div><div class="tech-items">LLM-powered analysis, NLP for document parsing, predictive forecasting, AI-driven anomaly detection</div></div>
+  </div>
+</div>
+</section>
+
+<!-- PROFILE -->
+<section class="section-lg">
+<div class="wrap">
+  <div class="profile-box">
+    <div class="profile-main">
+      <div class="profile-name">Alessandro Binda</div>
+      <div class="profile-role">Finance Transformation &amp; Integration PM — 18 years experience</div>
+      <p class="profile-bio">
+        P&amp;L owner (up to EUR 33M), 2 completed M&amp;A integrations, multi-site financial consolidation across 70+ locations, PE board reporting, ERP migrations (SAP → Salesforce). MSc Engineering (Politecnico di Milano) + MBA + Big Data specialisation. Industry, startup, PMI, PE-backed — from multinational corporations to fintech to general management.
+      </p>
+      <p class="profile-bio">
+        Currently building <a href="https://get-scala.com" style="font-weight:600">S.C.A.L.A. AI OS</a> — an enterprise AI operating system with 60+ financial integrations across 20 industry verticals. The same technology that powers this platform is what makes these frameworks more than theory.
+      </p>
+      <div class="profile-links">
+        <a href="https://linkedin.com/in/alessandrobindageneralmanager" target="_blank" style="background:#0a66c2">LinkedIn</a>
+        <a href="https://www.malt.com/profile/alessandrobinda" target="_blank" style="background:#fc5757">Malt</a>
+        <a href="https://github.com/Alessandro114" target="_blank" style="background:#333">GitHub</a>
+      </div>
+    </div>
+    <div class="stats-box">
+      <div class="stats-title">Key Numbers</div>
+      <div class="stat-row"><span class="stat-label">Years Experience</span><span class="stat-value">18</span></div>
+      <div class="stat-row"><span class="stat-label">P&amp;L Ownership</span><span class="stat-value">EUR 33M</span></div>
+      <div class="stat-row"><span class="stat-label">M&amp;A Integrations</span><span class="stat-value">2 completed</span></div>
+      <div class="stat-row"><span class="stat-label">Locations Consolidated</span><span class="stat-value">70+</span></div>
+      <div class="stat-row"><span class="stat-label">ERP Integrations Built</span><span class="stat-value">60+</span></div>
+      <div class="stat-row"><span class="stat-label">Industry Verticals</span><span class="stat-value">20</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-title">Need a Finance Integration PM?</div>
+  <p class="cta-sub">Post-merger integration, multi-site consolidation, ERP migration, PE reporting — I bring both the finance governance expertise and the technology skills to deliver. Available as fractional PM or full-time engagement.</p>
+  <div class="cta-buttons">
+    <a href="https://bookings.cloud.microsoft/bookwithme/user/2353647760594baebc7baa9ae06a5ad5%40get-scala.com?anonymous&ismsaljsauthenabled" class="btn btn-blue" target="_blank">Book a Discovery Call</a>
+    <a href="https://github.com/Alessandro114/finance-integration-playbook" class="btn btn-ghost" target="_blank">Explore the Playbook</a>
+  </div>
+  <p class="cta-footer">Built with S.C.A.L.A. AI OS — <a href="https://get-scala.com">get-scala.com</a></p>
+</section>
+
+</body>
+</html>
