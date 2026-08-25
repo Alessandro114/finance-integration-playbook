@@ -6,6 +6,8 @@
 [![Finance](https://img.shields.io/badge/domain-Finance%20%26%20PMI-green.svg)](#)
 [![BI](https://img.shields.io/badge/BI-Dashboard%20Architecture-orange.svg)](#)
 
+**[Live Demo Dashboard →](https://alessandro114.github.io/finance-integration-playbook/)**
+
 ---
 
 ## What This Is
